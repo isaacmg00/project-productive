@@ -1,6 +1,6 @@
 # project-productive
 
-mac/linux \n
+## mac/linux
 navigate to a directory where you want to store project files
 ```sh
 git clone https://github.com/isaacmg00/project-productive
