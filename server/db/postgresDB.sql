@@ -19,7 +19,7 @@ CREATE TABLE users (
 /* holds each user habit in a seperate table */
 CREATE TABLE user_habits (
   id BIGSERIAL NOT NULL PRIMARY KEY,
-  linked_user BIGINT NOT NULL REFERENCES users(useR_id)
+  linked_user uuid NOT NULL REFERENCES users(user_id),
   user_habit TEXT NOT NULL
 );
 
