@@ -1,7 +1,7 @@
 /* uuid extension */
 create extension if not exists "uuid-ossp";
 
-/* create database */
+/* create the database */
 CREATE DATABASE comp484_final;
 
 /* holds user account info */
