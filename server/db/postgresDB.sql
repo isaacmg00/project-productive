@@ -10,6 +10,7 @@ CREATE TABLE users (
   UNIQUE(email)
 );
 
+/* holds each user habit in a seperate table */
 CREATE TABLE user_habits (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   user_habit text
