@@ -1,3 +1,5 @@
+create extension if not exists "uuid-ossp";
+
 CREATE DATABASE comp484_final;
 
 /* holds user account info */
@@ -15,6 +17,9 @@ CREATE TABLE user_habits (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   user_habit text
 );
+
+/* sample user info/habits to practice queries */
+INSERT INTO users (id, name, email, password) values ('
   
 
 
