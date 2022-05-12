@@ -2,6 +2,5 @@ node_modules/
 
 # Ignore files related to API keys
 .env
-
-# ignore the file literally named foo[01].txt
+# database credentials
 index.js
