@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+  .nav-list{
+    align-items: center;
+    background:#EB0095;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0px;
+    padding-bottom:0px;
+    
+}
+
+
+.nav-item{
+  list-style:none; 
+  margin-right:3rem;
+}
+
+.nav-item a {
+  text-decoration: none;
+color: black;
+}
+
+.nav-item a:hover {
+  
+  color:#75FBED;
+}
+
+.nav-item:first-child{
+  margin-right: auto;
+  margin-left: 2rem;
+}
+
+.icon{
+    height: 130px;
+    
+}
