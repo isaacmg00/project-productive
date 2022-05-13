@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const { db } = require("./db");
@@ -11,14 +12,21 @@ const port = process.env.PORT || 5000;
 // TEST w/uuid =  b4f1bff6-c72a-48bd-9956-298c3c8aa9ce (user1)
 let loggedUserUUID = "b4f1bff6-c72a-48bd-9956-298c3c8aa9ce";
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`server is up and listening on port ${port}`);
+//test route
+app.get("/test", (req, res) => {
+  res.status(200);
+  console.log(req);
+  res.send({
+    name: "Bill",
+  });
 });
 
-//todo page
+// get all todolist items
 app.get("/ToDoPage", async (req, res) => {
   try {
     console.log("GET REQUEST TO /TODOPAGE");
@@ -41,7 +49,7 @@ app.get("/ToDoPage", async (req, res) => {
   }
 });
 
-//habit-tracker
+// get all user habits
 app.get("/habit-tracker", async (req, res) => {
   /*
   //
@@ -67,4 +75,8 @@ app.get("/habit-tracker", async (req, res) => {
   } catch (err) {
     console.error(err);
   }
+});
+
+app.listen(port, () => {
+  console.log(`server is up and listening on port ${port}`);
 });
