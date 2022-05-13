@@ -13,9 +13,47 @@ app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
 });
 
-app.get("/test", async (req, res) => {
+//todo page
+app.get("/ToDoPage", async (req, res) => {
   try {
-    console.log("hii");
+    console.log("GET REQUEST TO /TODOPAGE");
+    const data = await db.query("SELECT * FROM user_habits;");
+
+    res.status(200).json({
+      status: "success",
+      results: data.rows.length,
+      data: {
+        habits: data.rows,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//habit-tracker
+app.get("/habit-tracker", async (req, res) => {
+  try {
+    console.log("GET REQUEST TO HABIT TRACKER");
+    const restaurantsRatingData = await db.query(
+      "SELECT * FROM restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
+    );
+    res.status(200).json({
+      status: "success",
+      results: restaurantsRatingData.rows.length,
+      data: {
+        restaurants: restaurantsRatingData.rows,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//signup
+app.get("/signup", async (req, res) => {
+  try {
+    console.log("GET REQUEST TO SIGNUP");
     const restaurantsRatingData = await db.query(
       "SELECT * FROM restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
     );

@@ -38,6 +38,8 @@ INSERT INTO users (user_name, name, email, password) values ('root', 'isac', 'sa
 */
 
 
+
+
 /* this will insert habits that are linked to user1's profile and associated with them. */
 INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','clean up my room');
 

@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nodemon start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -16,7 +16,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "react-scripts": "^5.0.1"
   }
