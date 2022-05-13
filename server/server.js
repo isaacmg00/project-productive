@@ -35,14 +35,13 @@ app.get("/ToDoPage", async (req, res) => {
 app.get("/habit-tracker", async (req, res) => {
   try {
     console.log("GET REQUEST TO HABIT TRACKER");
-    const restaurantsRatingData = await db.query(
-      "SELECT * FROM restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
-    );
+    const data = await db.query("SELECT * FROM user_habits;");
+
     res.status(200).json({
       status: "success",
-      results: restaurantsRatingData.rows.length,
+      results: data.rows.length,
       data: {
-        restaurants: restaurantsRatingData.rows,
+        habits: data.rows,
       },
     });
   } catch (err) {
@@ -54,14 +53,13 @@ app.get("/habit-tracker", async (req, res) => {
 app.get("/signup", async (req, res) => {
   try {
     console.log("GET REQUEST TO SIGNUP");
-    const restaurantsRatingData = await db.query(
-      "SELECT * FROM restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
-    );
+    const data = await db.query("SELECT * FROM user_habits;");
+
     res.status(200).json({
       status: "success",
-      results: restaurantsRatingData.rows.length,
+      results: data.rows.length,
       data: {
-        restaurants: restaurantsRatingData.rows,
+        habits: data.rows,
       },
     });
   } catch (err) {

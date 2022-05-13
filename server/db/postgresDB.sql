@@ -23,6 +23,14 @@ CREATE TABLE user_habits (
   user_habit TEXT NOT NULL
 );
 
+/* holds each user todo list in a seperate table */
+CREATE TABLE user_todo (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  linked_user uuid NOT NULL REFERENCES users(user_id),
+  user_habit TEXT NOT NULL,
+  todo_item_order smallint NOT NULL
+);
+
 /* sample user info/habits to practice queries */
 INSERT INTO users (user_name, name, email, password) values ('user1', 'isaac', 'sample@biz.com', '12345');
 INSERT INTO users (user_name, name, email, password) values ('admin', 'izak', 'sample2@biz.com', 'abcde');
