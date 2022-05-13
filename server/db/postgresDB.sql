@@ -27,7 +27,7 @@ CREATE TABLE user_habits (
 CREATE TABLE user_todo (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   linked_user uuid NOT NULL REFERENCES users(user_id),
-  user_habit TEXT NOT NULL,
+  todo_item TEXT NOT NULL,
   todo_item_order smallint NOT NULL
 );
 
@@ -45,11 +45,12 @@ INSERT INTO users (user_name, name, email, password) values ('root', 'isac', 'sa
 (3 rows)
 */
 
-
-
-
 /* this will insert habits that are linked to user1's profile and associated with them. */
-INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','clean up my room');
+INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','walk for 2 miles');
+INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','go to the gym');
+INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','ride my bike');
+INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','eat healthier');
+INSERT INTO user_habits (linked_user, user_habit) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','read before bed');
 
 /* same goes for admin's profile, simply use their uuid when making the query to INSERT */
 INSERT INTO user_habits (linked_user, user_habit) values ('92cb53c1-ef16-4a49-bac2-a1f0657babb6','exercise for 1 hour daily');
@@ -61,6 +62,15 @@ INSERT INTO user_habits (linked_user, user_habit) values ('92cb53c1-ef16-4a49-ba
   2 | 92cb53c1-ef16-4a49-bac2-a1f0657babb6 | exercise for 1 hour daily
 (2 rows)
 */
+
+INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','finish my fullstack projects.', 1);
+INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','study for finals.', 2);
+INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','grind valorant battle pass.', 3);
+INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','pay my bills.', 4);
+INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('b4f1bff6-c72a-48bd-9956-298c3c8aa9ce','gym.', 5);
+
+
+
                                                  
   
 
