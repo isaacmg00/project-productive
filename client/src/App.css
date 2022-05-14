@@ -64,7 +64,10 @@ body{
     height: 350px;
 }
 
-
+.signup-page{
+  display: flex;
+  justify-content: center;
+}
 .title{
 
  color: white;

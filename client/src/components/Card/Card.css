@@ -1,0 +1,22 @@
+.card{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 15px;
+    background-color: #6A7BC4;
+    line-height: 60px;
+   
+    
+}
+
+.signup{
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center; 
+    width: 530px;
+    min-height: 300px;
+    text-align: center;
+    margin: 130px auto;
+    border-radius: 11px;
+    padding-bottom: 31px;
+}
