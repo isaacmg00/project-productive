@@ -10,7 +10,7 @@ function NavBar() {
         <li className="nav-item">
           <Link to="/">
             <img src={require("../../Assets/logo.png")} 
-            alt="logo" className='icon' /></Link>
+            alt="logo" className='icon' title='Home' /></Link>
         </li>
         <li className="nav-item">
           <Link to="/Habit-tracker">Habit Tracker</Link>
@@ -20,6 +20,9 @@ function NavBar() {
         </li>
         <li className="nav-item">
           <Link to="/Pomodoro">Pomodoro</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/login">Login</Link>
         </li>
         <li className="nav-item">
         <Link to="/signup"><Button/></Link>

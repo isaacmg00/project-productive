@@ -5,7 +5,7 @@
     font-family: 'Bebas Neue', cursive;
     font-family: 'Ewert', cursive;
     font-family: 'Secular One', sans-serif;
-    
+    animation: loadTransition 0.7s;
   }
 
   body {
@@ -14,8 +14,59 @@
     
 
   h1 {
-    margin: 33px 0;
+    
     color: #fff;
     font-size: 25px;
   }
-  
+
+  header{
+    background-image: url("Assets/productive1.avif");
+    padding-top: 270px;
+    text-align: center;
+    font-size:60px;
+    background-size: cover;
+    background-position: center;
+    padding-bottom:290px;
+    position: relative;
+}
+
+  @keyframes loadTransition{
+
+    from{
+        opacity: 0;
+        transform: translateY(-20px);
+      
+    }
+    to{
+        opacity: 1;
+       transform: translate(0);
+    }
+}
+
+body{
+    
+}
+
+  .home-page{
+    
+}
+
+.top-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 11, 59, 0.7)
+}
+
+  .logo{
+    height: 350px;
+}
+
+
+.title{
+
+ color: white;
+ font-size:60px;
+}
