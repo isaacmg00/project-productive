@@ -8,7 +8,7 @@ router.post("/register", async (req, res) => {
     //destructure req.body to obtain name, email, pw
     const { name, email, password } = req.body;
     //check if user exists
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
     if (user.rows.length !== 0) {
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
     //enter the user inside our db
     const newUser = await pool.query(
-      "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, bcryptPassword]
     );
 

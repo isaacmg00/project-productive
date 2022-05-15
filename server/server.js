@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 // populate this value with the UUID value of the current user that is logged in
 
 // TEST w/uuid =  b4f1bff6-c72a-48bd-9956-298c3c8aa9ce (user1)
-let loggedUserUUID = "b4f1bff6-c72a-48bd-9956-298c3c8aa9ce";
+let loggedUserUUID = "0102b22f-06a6-439f-95c0-ed18d3ec5d07";
 
 app.use(cors());
 app.use(express.json());
@@ -87,6 +87,19 @@ app.get("/habit-tracker", async (req, res) => {
   }
 });
 
+app.get("/api/v1/getName", async (req, res) => {
+  try {
+    const name = await db.query(
+      "SELECT name FROM users WHERE user_id::text = '" + loggedUserUUID + "';"
+    );
+    res.status(200).json({
+      name: name,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 //middleware for registration and login veryfication
 app.use((req, res, next) => {
   const { email, name, password } = req.body; //destructure
@@ -118,14 +131,14 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.post("/api/v1/restaurants/register", async (req, res) => {
+app.post("/api/v1/register", async (req, res) => {
+  console.log("WE GOT DATA");
   try {
     //1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
 
     //2. Check if user exists (if user exist then throw error)
-    const user = await db.query("SELECT * FROM users WHERE user_email = $1", [
+    const user = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
 
@@ -140,7 +153,7 @@ app.post("/api/v1/restaurants/register", async (req, res) => {
 
     //4. Enter the new user inside our database
     const newUser = await db.query(
-      "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, bcryptPassword]
     );
 
@@ -148,6 +161,10 @@ app.post("/api/v1/restaurants/register", async (req, res) => {
     const token = jwtGenerator(newUser.rows[0].user_id); //passing in the new user's user_id to the jason web token generator
 
     res.json({ token });
+    console.log("we added a user to the db");
+    loggedUserUUID = await db.query(
+      "select user_id from users where email='" + email + "';"
+    );
   } catch (err) {
     console.log(err.message);
     res.status(500).json("Server Error");
@@ -183,6 +200,9 @@ app.post("/api/v1/restaurants/login", async (req, res) => {
     const token = jwtGenerator(user.rows[0].user_id);
 
     res.json({ token });
+    loggedUserUUID = await db.query(
+      "select user_id from users where email='" + email + "';"
+    );
   } catch (err) {
     console.log(err.message);
   }
@@ -209,7 +229,7 @@ app.use((req, res, next) => {
 });
 
 //authorization route
-app.post("/api/v1/restaurants/is-verify", async (req, res) => {
+app.post("/api/v1/is-verify", async (req, res) => {
   try {
     res.json(true); //if token is valid then, return true statement that the user's token is valid
   } catch (err) {
