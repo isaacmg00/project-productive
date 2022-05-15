@@ -30,7 +30,6 @@ function App() {
           <Route path="/profile/:username" element={<Profile/>} />
           <Route path="*" element={<Error/>} />
         </Routes>
-        <ZenQuotes/>
         <Footer />
     </Router>
   );

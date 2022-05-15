@@ -1,5 +1,6 @@
 import React from 'react'
-import "../components/Card/Card.css";
+import "../App.css";
+
 function Signup() {
   return (
     <div className='signup-page'>

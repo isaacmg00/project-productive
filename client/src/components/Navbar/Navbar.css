@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    
 }
   .nav-list{
     align-items: center;
@@ -9,13 +10,14 @@
     justify-content: flex-end;
     padding-top: 0px;
     padding-bottom:0px;
-    
+   
 }
 
 
 .nav-item{
   list-style:none; 
   margin-right:3rem;
+ 
 }
 
 .nav-item a {
