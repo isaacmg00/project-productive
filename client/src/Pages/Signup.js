@@ -1,31 +1,6 @@
-<<<<<<< HEAD
-import React from 'react'
-import "../App.css";
-
-function Signup() {
-  return (
-    <div className='signup-page'>
-       <div className="card">
-          <div className='signup'>
-          <label><b>First Name</b></label>
-          <input type="text" placeholder="Enter your first name" name="fistName" required></input>
-          <label><b>Email</b></label>
-          <input type="text" placeholder="Enter Email"required />
-          <label><b>Password</b></label>
-          <input type="text" placeholder="Make a password"required />
-  
-    <button type="submit">Create Account</button>
-          </div>
-        </div>
-      
-    </div>
-  )
-}
-=======
 import { useState } from "react";
-import "../components/Card/Card.css";
+import "../App.css";
 import { Link } from "react-router-dom";
->>>>>>> a4e72bc8e4ed4622c0c4a94ba514eb7863fcc54b
 
 const Signup = ({ setAuth }) => {
   const [inputs, setInputs] = useState({

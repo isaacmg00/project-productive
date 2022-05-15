@@ -52,23 +52,6 @@ const App = () => {
     checkAuthenticated();
   }, []);
   return (
-<<<<<<< HEAD
-   
-   <Router>
-     <NavBar />
-     
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/ToDoPage" element={<TodoPage/>} />
-          <Route path="/pomodoro" element={<Pomodoro/>} />
-          <Route path="/Habit-tracker" element={<HabitTracker/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/profile/:username" element={<Profile/>} />
-          <Route path="*" element={<Error/>} />
-        </Routes>
-        <Footer />
-=======
     <Router>
       <NavBar />
 
@@ -113,7 +96,6 @@ const App = () => {
       </Routes>
       <ZenQuotes />
       <Footer />
->>>>>>> a4e72bc8e4ed4622c0c4a94ba514eb7863fcc54b
     </Router>
   );
 };
