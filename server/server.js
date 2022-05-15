@@ -12,15 +12,21 @@ const port = process.env.PORT || 5000;
 // TEST w/uuid =  b4f1bff6-c72a-48bd-9956-298c3c8aa9ce (user1)
 let loggedUserUUID = "b4f1bff6-c72a-48bd-9956-298c3c8aa9ce";
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(cors());
 app.use(express.json());
 
+//utube vid
+app.get("/api", (req, res) => {
+  res.json({
+    users: ["userone", "usertwo", "userthree"],
+  });
+});
+
 //test route
-app.get("/test", (req, res) => {
+app.get("/test", async (req, res) => {
   res.status(200);
-  console.log(req);
   res.send({
     name: "Bill",
   });
@@ -30,19 +36,24 @@ app.get("/test", (req, res) => {
 app.get("/ToDoPage", async (req, res) => {
   try {
     console.log("GET REQUEST TO /TODOPAGE");
+    let todo = [];
+
     const data = await db.query(
       "SELECT todo_item,todo_item_order FROM user_todo WHERE linked_user::text = '" +
         loggedUserUUID +
         "';"
     );
-    console.log(data);
+    let numItems = data.rows.length;
+    for (let i = 0; i < numItems; i++) {
+      console.log(i);
+      todo[i] = data.rows[i].todo_item;
+    }
+    console.log(todo);
 
     res.status(200).json({
+      todoItems: todo,
       status: "success",
       todoListItems: data.rows.length,
-      data: {
-        habits: data.rows,
-      },
     });
   } catch (err) {
     console.error(err);
@@ -58,19 +69,24 @@ app.get("/habit-tracker", async (req, res) => {
   */
   try {
     console.log("GET REQUEST TO HABIT TRACKER");
+    let habits = [];
     const data = await db.query(
       "SELECT user_habit FROM user_habits WHERE linked_user::text = '" +
         loggedUserUUID +
         "';"
     );
-    console.log(data);
+    let numHabits = data.rows.length;
+    for (let i = 0; i < numHabits; i++) {
+      console.log(i);
+      habits[i] = data.rows[i].user_habit;
+    }
+
+    console.log(habits);
 
     res.status(200).json({
+      habits: habits,
       status: "success",
       numHabits: data.rows.length,
-      data: {
-        habits: data.rows,
-      },
     });
   } catch (err) {
     console.error(err);
