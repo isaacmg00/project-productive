@@ -7,7 +7,6 @@ function TodoPage() {
     async function fetchMyAPI() {
       let response = await fetch("/ToDoPage");
       response = await response.json();
-      console.log(response);
       setBackendData(response);
     }
     fetchMyAPI();

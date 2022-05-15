@@ -7,7 +7,6 @@ function HabitTracker() {
     async function fetchMyAPI() {
       let response = await fetch("/habit-tracker");
       response = await response.json();
-      console.log(response);
       setBackendData(response);
     }
     fetchMyAPI();

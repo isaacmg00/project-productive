@@ -12,17 +12,8 @@ const port = process.env.PORT || 5000;
 // TEST w/uuid =  b4f1bff6-c72a-48bd-9956-298c3c8aa9ce (user1)
 let loggedUserUUID = "b4f1bff6-c72a-48bd-9956-298c3c8aa9ce";
 
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
-
-//utube vid
-app.get("/api", (req, res) => {
-  res.json({
-    users: ["userone", "usertwo", "userthree"],
-  });
-});
 
 //test route
 app.get("/test", async (req, res) => {
