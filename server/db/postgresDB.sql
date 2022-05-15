@@ -8,12 +8,10 @@ CREATE DATABASE comp484_final;
 CREATE TABLE users (
   user_id uuid PRIMARY KEY DEFAULT
   uuid_generate_v4(),
-  user_name VARCHAR(35) NOT NULL,
   name VARCHAR(35) NOT NULL,
   email VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
-  UNIQUE(email),
-  UNIQUE(user_name)
+  UNIQUE(email)
 );
 
 /* holds each user habit in a seperate table */
