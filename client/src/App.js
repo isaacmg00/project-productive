@@ -57,7 +57,9 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
+          {/* temporary below */}
+        <Route path="/ToDoPage" element={<TodoPage/>}/> 
+        {/* <Route
           path="/ToDoPage"
           element={
             isAuthenticated ? (
@@ -66,10 +68,12 @@ const App = () => {
               <Navigate to="/login" />
             )
           }
-        />
+        /> */}
 
         <Route path="/pomodoro" element={<Pomodoro />} />
-        <Route
+        {/* temporary below and uncomment the route */}
+        <Route path="/Habit-tracker" element={<HabitTracker/>}/> 
+        {/* <Route
           path="/Habit-tracker"
           element={
             isAuthenticated ? (
@@ -78,7 +82,7 @@ const App = () => {
               <Navigate to="/login" />
             )
           }
-        />
+        /> */}
         <Route
           path="/signup"
           element={

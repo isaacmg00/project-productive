@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../App.css";
+import TodoList from '../components/TodoList/TodoList';
 
 function HabitTracker() {
   const [backendData, setBackendData] = useState([]);
@@ -33,6 +34,9 @@ function HabitTracker() {
     <div>
       <h1>Habit Tracker</h1>
       <p>Here are your habits</p>
+      <div className="todo-list">
+        <TodoList/>
+      </div>
       <div>
         {typeof backendData.habits === "undefined" ? (
           <p>Loading...</p>
