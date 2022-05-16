@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import{useParams} from "react-router-dom"; 
+import { props } from "react-router-dom";
 
-function Profile() {
-
-    let { username } = useParams();
+function Profile(props) {
+  //let { username } = useParams();
   return (
-    <div>Welcome {username} !</div>
-  )
+    <div>
+      <h1> Welcome {props.username} ! </h1>
+    </div>
+  );
 }
-
-export default Profile
+export default Profile;

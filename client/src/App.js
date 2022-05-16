@@ -85,7 +85,7 @@ const App = () => {
             !isAuthenticated ? (
               <Signup setAuth={setAuth} />
             ) : (
-              <Navigate to="/profile/newUser" />
+              <Navigate to="/profile/:username" />
             )
           }
         />
@@ -96,11 +96,11 @@ const App = () => {
             !isAuthenticated ? (
               <Login setAuth={setAuth} />
             ) : (
-              <Navigate to="/profile/newUser" />
+              <Navigate to="/profile/:username" />
             )
           }
         />
-        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/:username" element={<Profile username="" />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <ZenQuotes />
