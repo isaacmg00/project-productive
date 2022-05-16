@@ -1,11 +1,9 @@
 import React from 'react'
+import PomodoroTimer from '../components/PomodoroTimer/Pomodoro';
 
 function Pomodoro() {
   return (
-    <div>
-        
-        <h1>Pomodoro</h1>
-        </div>
+        <PomodoroTimer /> 
   )
 }
 
