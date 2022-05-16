@@ -19,6 +19,8 @@ app.use(express.json());
 app.get("/ToDoPage", async (req, res) => {
   try {
     console.log("GET REQUEST TO /TODOPAGE");
+    console.log(loggedUserUUID);
+
     let todo = [];
 
     const data = await db.query(
@@ -26,6 +28,7 @@ app.get("/ToDoPage", async (req, res) => {
         loggedUserUUID +
         "';"
     );
+    console.log(data);
     let numItems = data.rows.length;
     for (let i = 0; i < numItems; i++) {
       console.log(i);
@@ -199,12 +202,10 @@ app.post("/api/v1/login", async (req, res) => {
 });
 
 //authorization route
-app.post("/api/v1/is-verify", async (req, res) => {
+app.post("/api/v1/restaurants/is-verify", async (req, res) => {
   try {
     res.json(true); //if token is valid then, return true statement that the user's token is valid
   } catch (err) {
-    res.json(true); //if token is valid then, return true statement that the user's token is valid
-
     console.log(err.message);
     res.status(500).send("Server Error");
   }
