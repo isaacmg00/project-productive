@@ -85,12 +85,21 @@ const App = () => {
             !isAuthenticated ? (
               <Signup setAuth={setAuth} />
             ) : (
-              <Navigate to="/profile/" />
+              <Navigate to="/profile/newUser" />
             )
           }
         />
 
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            !isAuthenticated ? (
+              <Login setAuth={setAuth} />
+            ) : (
+              <Navigate to="/profile/newUser" />
+            )
+          }
+        />
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="*" element={<Error />} />
       </Routes>

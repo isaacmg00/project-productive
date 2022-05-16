@@ -18,14 +18,11 @@ const Login = ({ setAuth }) => {
 
     try {
       const body = { email, password };
-      const response = await fetch(
-        "http://localhost:3001/api/v1/restaurants/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch("http://localhost:3001/api/v1/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
       const parseRes = await response.json(); //getting the token and storing it in a variable
 
@@ -33,10 +30,8 @@ const Login = ({ setAuth }) => {
         //if there is a token generated
         localStorage.setItem("token", parseRes.token); //storing the token in the local storage
         setAuth(true);
-        toast.success("login successfull!");
       } else {
         setAuth(false);
-        toast.error(parseRes); //returning the error created in the login route in server.js
       }
     } catch (err) {
       console.error(err.message);
@@ -45,18 +40,36 @@ const Login = ({ setAuth }) => {
   return (
     <div className="signup-page">
       <div className="card">
-        <div className="signup">
-          <label>
-            <b>Email</b>
-          </label>
-          <input type="text" placeholder="Enter Email" required />
-          <label>
-            <b>Password</b>
-          </label>
-          <input type="text" placeholder="Enter your password" required />
+        <form onSubmit={onSubmitForm}>
+          <div className="signup">
+            <label>
+              <b>Email</b>
+            </label>
 
-          <button type="submit">Login</button>
-        </div>
+            <input
+              value={email}
+              onChange={(e) => onChange(e)}
+              name="email"
+              type="text"
+              placeholder="Enter Email"
+              required
+            />
+
+            <label>
+              <b>Password</b>
+            </label>
+            <input
+              value={password}
+              name="password"
+              onChange={(e) => onChange(e)}
+              type="password"
+              placeholder="Enter your password"
+              required
+            />
+
+            <button type="submit">Login</button>
+          </div>
+        </form>
       </div>
     </div>
   );

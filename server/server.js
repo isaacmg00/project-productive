@@ -10,21 +10,10 @@ const jwtGenerator = require("./utils/jwtGenerator");
 
 const port = process.env.PORT || 5000;
 
-// populate this value with the UUID value of the current user that is logged in
-
-// TEST w/uuid =  b4f1bff6-c72a-48bd-9956-298c3c8aa9ce (user1)
 let loggedUserUUID = "0102b22f-06a6-439f-95c0-ed18d3ec5d07";
 
 app.use(cors());
 app.use(express.json());
-
-//test route
-app.get("/test", async (req, res) => {
-  res.status(200);
-  res.send({
-    name: "Bill",
-  });
-});
 
 // get all todolist items
 app.get("/ToDoPage", async (req, res) => {
@@ -56,11 +45,6 @@ app.get("/ToDoPage", async (req, res) => {
 
 // get all user habits
 app.get("/habit-tracker", async (req, res) => {
-  /*
-  //
-  //uuid must be set once login functionality is implemented
-  //
-  */
   try {
     console.log("GET REQUEST TO HABIT TRACKER");
     let habits = [];
@@ -149,12 +133,10 @@ app.post("/api/v1/register", async (req, res) => {
     const saltRound = 10; //how encrypted the password will be
     const salt = await bcrypt.genSalt(saltRound);
 
-    const bcryptPassword = await bcrypt.hash(password, salt); //will give us a decrypted password
-
     //4. Enter the new user inside our database
     const newUser = await db.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-      [name, email, bcryptPassword]
+      [name, email, password]
     );
 
     //5. generating our jwt token
@@ -172,13 +154,14 @@ app.post("/api/v1/register", async (req, res) => {
 });
 
 //login route
-app.post("/api/v1/restaurants/login", async (req, res) => {
+app.post("/api/v1/login", async (req, res) => {
   try {
     //1. destructure the req.body
     const { email, password } = req.body;
+    console.log("login hit");
 
     //2. check if user doesn't exist (if not then we throw error)
-    const user = await db.query("SELECT * from users where user_email = $1", [
+    const user = await db.query("SELECT * from users where email = $1", [
       email,
     ]);
 
@@ -187,11 +170,24 @@ app.post("/api/v1/restaurants/login", async (req, res) => {
     }
 
     //3. check if incoming password is the same as the database password
-    const validPassword = await bcrypt.compare(
-      password,
-      user.rows[0].user_password
-    ); //Comparing inputed password with the password in the database
+    //let validPassword = await bcrypt.compare(
+    //   password,
+    //  user.rows[0].user_password
+    //);
 
+    let validPassword;
+    console.log(password);
+    const query = await db.query(
+      "SELECT password from users where email ='" + email + "';"
+    );
+    const dbPW = query.rows[0].password;
+    if (dbPW === password) {
+      validPassword = true;
+    } else {
+      validPassword = false;
+    }
+    //Comparing inputed password with the password in the database
+    console.log(validPassword);
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
     }
