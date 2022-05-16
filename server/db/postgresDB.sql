@@ -67,6 +67,8 @@ INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('0102b22
 INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('0102b22f-06a6-439f-95c0-ed18d3ec5d07','pay my bills.', 4);
 INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('0102b22f-06a6-439f-95c0-ed18d3ec5d07','gym.', 5);
 
+INSERT INTO user_habits (linked_user, user_habit) values ('d1e58626-5ed8-413b-994e-ce251dd5f35b','read before bed');
+
 
 
                                                  

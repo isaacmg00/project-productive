@@ -144,9 +144,10 @@ app.post("/api/v1/register", async (req, res) => {
 
     res.json({ token });
     console.log("we added a user to the db");
-    loggedUserUUID = await db.query(
+    uuidQuery = await db.query(
       "select user_id from users where email='" + email + "';"
     );
+    loggedUserUUID = uuidQuery.rows[0].user_id;
   } catch (err) {
     console.log(err.message);
     res.status(500).json("Server Error");
@@ -169,14 +170,7 @@ app.post("/api/v1/login", async (req, res) => {
       return res.status(401).json("Password or Email is incorrect");
     }
 
-    //3. check if incoming password is the same as the database password
-    //let validPassword = await bcrypt.compare(
-    //   password,
-    //  user.rows[0].user_password
-    //);
-
     let validPassword;
-    console.log(password);
     const query = await db.query(
       "SELECT password from users where email ='" + email + "';"
     );
@@ -187,7 +181,6 @@ app.post("/api/v1/login", async (req, res) => {
       validPassword = false;
     }
     //Comparing inputed password with the password in the database
-    console.log(validPassword);
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
     }
@@ -196,9 +189,10 @@ app.post("/api/v1/login", async (req, res) => {
     const token = jwtGenerator(user.rows[0].user_id);
 
     res.json({ token });
-    loggedUserUUID = await db.query(
+    uuidQuery = await db.query(
       "select user_id from users where email='" + email + "';"
     );
+    loggedUserUUID = uuidQuery.rows[0].user_id;
   } catch (err) {
     console.log(err.message);
   }
@@ -234,18 +228,12 @@ app.post("/api/v1/is-verify", async (req, res) => {
   }
 });
 
-//route for getting authorized user's information when on home page
-app.post("/api/v1/restaurants/home", async (req, res) => {
+app.post("/api/v1/habits", async (req, res) => {
   try {
-    const user = await db.query(
-      "SELECT user_name FROM users WHERE user_id = $1",
-      [req.user]
-    ); //req.user has the payload (from authorization middleware)
-    res.json(user.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
+    //1. destructure the req.body (name, email, password)
+    //const { name, email, password } = req.body;
+    console.log(req.body);
+  } catch (err) {}
 });
 
 app.listen(port, () => {
