@@ -70,7 +70,17 @@ const App = () => {
           }
         /> */}
 
-        <Route path="/pomodoro" element={<Pomodoro />} />
+                <Route 
+        path="/pomodoro" 
+          element={
+            isAuthenticated ? (
+              <Pomodoro setAuth={setAuth} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+          // element={<Pomodoro />}
+        />
         {/* temporary below and uncomment the route */}
         <Route path="/Habit-tracker" element={<HabitTracker/>}/> 
         {/* <Route
