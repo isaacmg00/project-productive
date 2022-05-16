@@ -33,7 +33,6 @@ function HabitTracker() {
   return (
     <div>
       <h1>Habit Tracker</h1>
-      <p>Here are your habits</p>
       <div className="todo-list">
         <TodoList/>
       </div>

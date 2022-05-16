@@ -10,7 +10,7 @@ const jwtGenerator = require("./utils/jwtGenerator");
 
 const port = process.env.PORT || 5000;
 
-let loggedUserUUID = "0102b22f-06a6-439f-95c0-ed18d3ec5d07";
+let loggedUserUUID = "d4a7681c-bf50-478d-816f-cf535d871dfc";
 
 app.use(cors());
 app.use(express.json());
@@ -198,42 +198,56 @@ app.post("/api/v1/login", async (req, res) => {
   }
 });
 
-//middleware for authorization to authorize the person. Making sure the token is legit
-app.use((req, res, next) => {
-  const jwtToken = req.header("token"); //get token from header
-
-  if (!jwtToken) {
-    //if there is no jwt token then the user is not authorized to access that entity
-    return res.status(403).json("Not Authorized");
-  }
-
-  try {
-    const verify = jwt.verify(jwtToken, process.env.jwtSecret); //checks to see if the jwt token is valid, if it is then we can return a payload that we can use within our routes
-
-    req.user = verify.user; //user is from the jwtGenerator.js file
-  } catch (err) {
-    console.log(err.message);
-    return res.status(403).json("Not Authorized");
-  }
-  next();
-});
-
 //authorization route
 app.post("/api/v1/is-verify", async (req, res) => {
   try {
     res.json(true); //if token is valid then, return true statement that the user's token is valid
   } catch (err) {
+    res.json(true); //if token is valid then, return true statement that the user's token is valid
+
     console.log(err.message);
     res.status(500).send("Server Error");
   }
 });
 
+app.options("*", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type"); // Add other headers here
+  res.setHeader("Access-Control-Allow-Methods", "POST"); // Add other methods here
+  res.send();
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  next();
+});
+
 app.post("/api/v1/habits", async (req, res) => {
-  try {
-    //1. destructure the req.body (name, email, password)
-    //const { name, email, password } = req.body;
-    console.log(req.body);
-  } catch (err) {}
+  res.status(201).send("post to habits");
+  const formInput = req.body.input;
+  console.log(loggedUserUUID);
+  console.log(req.body.input);
+  insertTodo = await db.query(
+    "INSERT INTO user_habits (linked_user, user_habit) values ('" +
+      loggedUserUUID +
+      "','" +
+      formInput +
+      "');"
+  );
+});
+
+app.post("/api/v1/todo", async (req, res) => {
+  res.status(201).send("post to todo");
+  const formInput = req.body.input;
+  console.log(loggedUserUUID);
+  console.log(req.body.input);
+  insertTodo = await db.query(
+    "INSERT INTO user_todo (linked_user, todo_item, todo_item_order) values ('" +
+      loggedUserUUID +
+      "','" +
+      formInput +
+      "','1');"
+  );
 });
 
 app.listen(port, () => {
