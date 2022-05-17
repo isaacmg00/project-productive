@@ -27,7 +27,7 @@ npm start
 # Setup/Install PostgreSQL Database
 ### Install: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads 
 ### Install guide: https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/
-Once you have installed PostgreSQL, navigate to ```server/db/postgresDB.sql``` and copy the commands seen there to create the database along with its tables. Additionally, create a file, ```index.js``` inside of the db folder that contains your database credentials. 
+Once you have installed PostgreSQL, navigate to ```server/db/postgresDB.sql``` and copy the commands seen there to create the database along with its tables. Additionally, create a file, ```index.js``` inside of the db folder that contains your db credentials. 
 
 ```
 const { Pool } =  require("pg");
