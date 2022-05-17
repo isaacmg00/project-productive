@@ -1,5 +1,3 @@
-# project-productive
-
 ## Mac/Linux development environment
 
 navigate to a directory where you want to store project files
