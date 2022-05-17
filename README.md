@@ -1,6 +1,6 @@
 # project-productive
 
-## mac/linux
+## Mac/Linux development environment
 
 navigate to a directory where you want to store project files
 
@@ -10,6 +10,9 @@ cd project-productive
 cd client
 npm install
 npm i react-scripts
+cd ..
+cd server
+npm install
 ```
 
 start the react app dev server. make sure you're in the client/ directory
